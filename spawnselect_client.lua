@@ -16,7 +16,7 @@ local spawnPoints = {
 
 local selectedSpawnPoint = 1
 local spawnPointNames = {}
-
+local firstSpawn = true
 _menuPool = MenuPool.New()
 spawnSelectMenu = UIMenu.New("Spawn", "~b~Select a spawnpoint", 1350, 0)
 _menuPool:Add(spawnSelectMenu)
@@ -87,12 +87,15 @@ function spawnPlayer()
 end
 
 AddEventHandler('playerSpawned', function(spawn)
-    createLocationList(spawnPoints)
-    addLocations(spawnSelectMenu)
-    addSpawnButton(spawnSelectMenu)
-    _menuPool:RefreshIndex()
-    setupPlayer()
-    drawCam(1)
+    if firstSpawn then
+        createLocationList(spawnPoints)
+        addLocations(spawnSelectMenu)
+        addSpawnButton(spawnSelectMenu)
+        _menuPool:RefreshIndex()
+        setupPlayer()
+        drawCam(1)
+        firstSpawn = false
+    end
 end)
 
 Citizen.CreateThread(function()
