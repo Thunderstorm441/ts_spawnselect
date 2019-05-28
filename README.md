@@ -1,7 +1,7 @@
 # ts_spawnselect
 A spawn selection system for FiveM, originally developed for [ConflictRP](http://gtarp.gg)
 
-### Requires NativeUI by Frazzle [FiveM post](https://forum.fivem.net/t/release-dev-nativeuilua/98318)
+### Requires [NativeUI](https://forum.fivem.net/t/release-dev-nativeuilua/98318) by Frazzle
 
 __Included Spawn Points__
 * Airport
