@@ -12,6 +12,7 @@ local spawnPoints = {
     {name="Sandy Shores", spawnX=1860.68,spawnY=3851.2,spawnZ=32.99,camX=1939.992,camY=3842.664,camZ=68.86},
     {name="Paleto Bay", spawnX=-150.53,spawnY=6416.903,spawnZ=31.91,camX=-222.438,camY=6429.05,camZ=65.16},
 }
+local openOnPlayerSpawned = true --set to false if you do not want the menu to open on first spawn
 --END OF CONFIG
 
 local selectedSpawnPoint = 1
@@ -87,15 +88,20 @@ function spawnPlayer()
 end
 
 AddEventHandler('playerSpawned', function(spawn)
-    if firstSpawn then
-        createLocationList(spawnPoints)
-        addLocations(spawnSelectMenu)
-        addSpawnButton(spawnSelectMenu)
-        _menuPool:RefreshIndex()
-        setupPlayer()
-        drawCam(1)
+    if firstSpawn and openOnPlayerSpawned then
+        TriggerEvent("ts_spawnselect:openMenu")
         firstSpawn = false
     end
+end)
+
+RegisterNetEvent("ts_spawnselect:openMenu")
+AddEventHandler("ts_spawnselect:openMenu", function()
+    createLocationList(spawnPoints)
+    addLocations(spawnSelectMenu)
+    addSpawnButton(spawnSelectMenu)
+    _menuPool:RefreshIndex()
+    setupPlayer()
+    drawCam(1)
 end)
 
 Citizen.CreateThread(function()
